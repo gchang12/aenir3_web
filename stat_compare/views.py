@@ -12,7 +12,7 @@ from django.shortcuts import render
 from .models import (
     FireEmblemGame, # game_num, game_name, display_name
     FireEmblemUnit # game_num, unit_name, display_name, campaign, father_name
-    )
+)
 
 # because what else will we be playing with?
 import aenir.morph
@@ -22,17 +22,17 @@ class StatCompare:
     """
     """
 
-    # for use in Morph methods
-    DATADIR_ROOT = "./stat_compare/static/stat_compare/data/"
-
     # for use in creating Morphs
     QUINTESSENCE = OrderedDict()
 
     # for use in storing Morphs
-    DRAGONS_GATE = tuple(None for index in range(6))
+    DRAGONS_GATE = OrderedDict()
+
+    # for use in Morph methods
+    datadir_root = "./stat_compare/static/stat_compare/data/"
 
     # for use in rendering the web page
-    about_info = {}
+    about_unit = {}
     unit_history = {}
 
     @classmethod

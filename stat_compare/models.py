@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+# implement via Django Smart-Selects
 
 class FireEmblemGame(models.Model):
     game_num = models.PositiveSmallIntegerField(
