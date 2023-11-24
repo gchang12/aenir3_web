@@ -1,4 +1,5 @@
 from django.db import models
+from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
 # implement via Django Smart-Selects
@@ -23,11 +24,19 @@ class FireEmblemUnit(models.Model):
         FireEmblemGame,
         on_delete=models.PROTECT,
         )
-    unit_name = models.CharField(max_length=50)
+    unit_name = ChainedForeignKey(
+        FireEmblemGame,
+        chained_field="game_num",
+        chained_model_field="game_num",
+        show_all=False,
+        auto_choose=True,
+        sort=True
+        )
     display_name = models.CharField(
         max_length=50,
         verbose_name="Unit",
         )
+    """
     # 7: lyn_mode: Lyn Mode units have this field set to a non-blank
     campaign = models.CharField(
         max_length=50,
@@ -59,3 +68,4 @@ class FireEmblemUnit(models.Model):
             ),
         verbose_name="Father",
         )
+    """
