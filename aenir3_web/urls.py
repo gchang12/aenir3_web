@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, url
+from django.urls import path, include
 
 # import works. nothing to worry about regarding this.
 #from aenir.morph import Morph
@@ -26,5 +26,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls")),
     path("stat_compare/", include("stat_compare.urls")),
-    url(r'^chaining', include('smart_selects.urls')),
+    path("chaining", include('smart_selects.urls')),
 ]

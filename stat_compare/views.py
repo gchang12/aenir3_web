@@ -18,7 +18,7 @@ from .models import (
 import aenir.morph
 
 
-class StatCompare:
+class StatCompareViews:
     """
     """
 
