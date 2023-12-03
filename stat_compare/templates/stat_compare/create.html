@@ -4,7 +4,8 @@
 {% block widget %}
 <form action="{% url 'stat_compare:create' %}" method="post">
   {% csrf_token %}
-  {{ form }}
+  {{ form.media.js }}
+  {{ form.as_p }}
   <input type="submit" />
 </form>
 {% endblock %}

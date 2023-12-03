@@ -124,4 +124,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-JQUERY_URL = True
+# https://stackoverflow.com/questions/45744315/django-admin-bool-object-has-no-attribute-startswith
+#JQUERY_URL = True
+USE_DJANGO_JQUERY = True

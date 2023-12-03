@@ -28,20 +28,23 @@ class FireEmblemUnit(models.Model):
         )
     unit_name = models.CharField(
         max_length=50,
+        #verbose_name="Unit",
         )
     display_unitname = models.CharField(
         max_length=50,
-        verbose_name="Unit",
+        #verbose_name="Unit",
         )
 
     def __str__(self):
-        return str(self.game_num.game_num) + ": " + self.display_unitname
+        return self.display_unitname
+        #return str(self.game_num.game_num) + ": " + self.display_unitname
 
 
 class UnitSelect(models.Model):
     game_num = models.ForeignKey(
         FireEmblemGame,
         on_delete=models.PROTECT,
+        verbose_name="Game",
         )
     unit_name = ChainedForeignKey(
         FireEmblemUnit,
@@ -49,6 +52,7 @@ class UnitSelect(models.Model):
         chained_model_field="game_num",
         show_all=False,
         sort=False,
+        verbose_name="Unit",
         )
 
     def __str__(self):

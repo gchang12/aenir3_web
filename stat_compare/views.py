@@ -11,7 +11,12 @@ from django.shortcuts import render
 # for unit-select menu unless there's a better way (?)
 from .models import (
     FireEmblemGame, # game_num, game_name, display_name
-    FireEmblemUnit # game_num, unit_name, display_name, campaign, father_name
+    FireEmblemUnit, # game_num, unit_name, display_name, campaign, father_name
+    UnitSelect,
+)
+
+from .forms import (
+    UnitSelectForm
 )
 
 # because what else will we be playing with?
@@ -47,7 +52,10 @@ class StatCompareViews:
     def create(cls, request):
         """
         """
-        context = {"view_name": "Create"}
+        context = {
+                "view_name": "Create",
+                "form": UnitSelectForm(),
+                }
         return render(request, "stat_compare/create.html", context=context)
 
     @classmethod
