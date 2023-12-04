@@ -58,6 +58,26 @@ class UnitSelect(models.Model):
     def __str__(self):
         return str(self.game_num) + ": " + self.unit_name.display_unitname
 
+class UserRegistry(models.Model):
+    username = models.CharField(
+        primary_key=True,
+        max_length=30,
+        )
+
+class DragonsGate(models.Model):
+    username = models.ForeignKey(
+        UserRegistry,
+        on_delete=models.PROTECT
+        )
+    game_num = models.PositiveSmallIntegerField()
+    unit_name = models.CharField(max_length=50)
+    current_clstype = models.CharField(max_length=50)
+    current_cls = models.CharField(max_length=50)
+    current_lv = models.PositiveSmallIntegerField()
+    promo_cls = models.CharField(max_length=50)
+    bases = models.JSONField()
+    growths = models.JSONField()
+    comparison_labels = models.JSONField()
 
 # not to be used in forms and so forth
 

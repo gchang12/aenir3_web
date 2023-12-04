@@ -4,22 +4,16 @@
 
 from collections import OrderedDict
 
-#from django.http import HttpResponse
-# to render Jinja templates
 from django.shortcuts import render
 
-# for unit-select menu unless there's a better way (?)
-from .models import (
-    FireEmblemGame, # game_num, game_name, display_name
-    FireEmblemUnit, # game_num, unit_name, display_name, campaign, father_name
-    UnitSelect,
-)
-
 from .forms import (
-    UnitSelectForm
+    UnitSelectForm,
 )
-
-# because what else will we be playing with?
+from .models import (
+    LyndisLeague,
+    FireEmblemGenealogy,
+    DragonsGate,
+)
 import aenir.morph
 
 
@@ -29,9 +23,6 @@ class StatCompareViews:
 
     # for use in creating Morphs
     QUINTESSENCE = OrderedDict()
-
-    # for use in storing Morphs
-    DRAGONS_GATE = OrderedDict()
 
     # for use in Morph methods
     datadir_root = "./stat_compare/static/stat_compare/data/"
