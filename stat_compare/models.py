@@ -18,7 +18,7 @@ class FireEmblemGame(models.Model):
         )
 
     def __str__(self):
-        return str(self.game_num) + ": " + self.display_gamename
+        return self.display_gamename
 
 
 class FireEmblemUnit(models.Model):
@@ -54,37 +54,36 @@ class UnitSelect(models.Model):
         sort=False,
         verbose_name="Unit",
         )
-
     def __str__(self):
         return str(self.game_num) + ": " + self.unit_name.display_unitname
 
 class UserRegistry(models.Model):
     username = models.CharField(
         primary_key=True,
-        max_length=30,
+        max_length=50,
         )
+    def __str__(self):
+        return self.username
 
 class DragonsGate(models.Model):
     username = models.ForeignKey(
         UserRegistry,
         on_delete=models.PROTECT
         )
-    game_num = models.PositiveSmallIntegerField()
-    unit_name = models.CharField(max_length=50)
-    current_clstype = models.CharField(max_length=50)
-    current_cls = models.CharField(max_length=50)
-    current_lv = models.PositiveSmallIntegerField()
-    promo_cls = models.CharField(max_length=50)
-    bases = models.JSONField()
-    growths = models.JSONField()
-    comparison_labels = models.JSONField()
+    game_num = models.PositiveSmallIntegerField(default=0)
+    unit_name = models.CharField(max_length=50, default="")
+    current_clstype = models.CharField(max_length=50, default="")
+    current_cls = models.CharField(max_length=50, default="")
+    current_lv = models.PositiveSmallIntegerField(default=0)
+    promo_cls = models.CharField(max_length=50, default="")
+    bases = models.JSONField(default=dict)
+    growths = models.JSONField(default=dict)
+    comparison_labels = models.JSONField(default=dict)
 
 # not to be used in forms and so forth
 
 class LyndisLeague(models.Model):
-    game_num = models.PositiveSmallIntegerField(
-        #primary_key=True,
-        )
+    #game_num = models.PositiveSmallIntegerField( #primary_key=True,)
     unit_name = models.CharField(
         max_length=50,
         primary_key=True,
@@ -92,27 +91,37 @@ class LyndisLeague(models.Model):
     display_unitname = models.CharField(
         max_length=50,
         )
-
+    lyn_mode = models.BooleanField(
+        default=False,
+        verbose_name="Campaign",
+        choices=[
+            (False, "Main"),
+            (True, "Tutorial"),
+            ]
+        )
     def __str__(self):
         return self.display_unitname
 
-
-class FireEmblemGenealogy(models.Model):
-    # Store both kids and dads here
-    game_num = models.PositiveSmallIntegerField(
-        )
+class GenealogyKid(models.Model):
+    #game_num = models.PositiveSmallIntegerField( #primary_key=True,)
     unit_name = models.CharField(
-        primary_key=True,
         max_length=50,
+        primary_key=True,
         )
     display_unitname = models.CharField(
         max_length=50,
         )
-    can_inherit = models.BooleanField()
-
     def __str__(self):
-        if self.can_inherit:
-            genealogy = "Child"
-        else:
-            genealogy = "Father"
-        return genealogy + ": " + self.display_unitname
+        return self.display_unitname
+
+class GenealogyDad(models.Model):
+    #game_num = models.PositiveSmallIntegerField( #primary_key=True,)
+    father_name = models.CharField(
+        max_length=50,
+        primary_key=True,
+        )
+    display_unitname = models.CharField(
+        max_length=50,
+        )
+    def __str__(self):
+        return self.display_unitname
